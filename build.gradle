@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.3'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id "maven-publish"
+    id 'jacoco'
+    id "com.github.spotbugs" version "5.0.14"
+    id "io.freefair.lombok" version "8.0.1"
+    id "checkstyle"
+    id "pmd"
+}
+
+group = 'com.audition'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+
+apply from: 'config/code-analysis.gradle'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', "2022.0.1")
+    set('springDocWebMvcUi', "2.0.4")
+    set('springDocOpenApUi', "1.7.0")
+}
+
+dependencies {
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.hibernate.validator:hibernate-validator'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocWebMvcUi}"
+    implementation "org.springdoc:springdoc-openapi-ui:${springDocOpenApUi}"
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    implementation 'org.apache.commons:commons-lang3:3.0'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+
+task prepareGitHooks(type: Copy) {
+    from "$projectDir/git-hooks"
+    into "$projectDir/.git/hooks"
+    include "*"
+}
+tasks.matching { it.name != 'prepareGitHooks' }.all { Task task -> task.dependsOn prepareGitHooks }
+
+
+tasks.named('test') {
+    maxParallelForks = Runtime.runtime.availableProcessors()
+    useJUnitPlatform()
+}

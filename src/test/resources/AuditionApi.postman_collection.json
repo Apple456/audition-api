@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "3e30e1d1-243e-498b-acaf-11f42aba306d",
+		"name": "Medibank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3927070",
+		"_collection_link": "https://grey-rocket-582057.postman.co/workspace/Team-Workspace~6a69f9fe-855c-4eb0-88e7-5956c8058687/collection/3927070-3e30e1d1-243e-498b-acaf-11f42aba306d?action=share&creator=3927070&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "posts",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts?userId=10&page=0&size=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "posts paginated",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts?page=1&size=3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get posts paginated - fail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts?userId=1&page=0&size=-1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/comments?postId=1&page=0&size=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"comments"
+					],
+					"query": [
+						{
+							"key": "postId",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get posts by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get posts by Id - not found",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/911111",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"911111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get posts by Id with comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/1/comments",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get posts by Id with comments paginated",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/30/comments?page=0&size=2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"30",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actuator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/actuator",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"actuator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actuator info",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/actuator/info",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"actuator",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actuator health",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/actuator/health",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actuator beans",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "my-secret-password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/actuator/beans",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"actuator",
+						"beans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actuator beans - fail",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/actuator/beans",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"actuator",
+						"beans"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
